@@ -1,0 +1,682 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #FFFED0;
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    user-select: none;
+}
+
+header,
+section,
+footer {
+    width: 100%;
+}
+
+:root {
+    --white: #fff;
+    --dark: #231f20;
+    --green: #5ba241;
+    --overlay: rgba(0, 0, 0, 0.3);
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --header-height: 100px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #FFFED0;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #5ba241;
+    border-radius: 10px;
+    border: 2px solid #FFFED0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #4c8836;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #5ba241 #FFFED0;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    z-index: 1000;
+    transition: background 0.3s ease;
+}
+
+.header.scrolled {
+    background: #FFFED0;
+    box-shadow: var(--shadow);
+}
+
+.header__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.header__logo {
+    flex: 0 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+.header__logo.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.header__logo img {
+    height: 90px;
+    transition: height 0.3s ease;
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
+    background: var(--green);
+}
+
+.nav-group--wide {
+    border-radius: 25px;
+    padding: 0.5rem 0.5rem;
+}
+
+.nav-group--narrow {
+    border-radius: 40px;
+    padding: 0.3rem 0.5rem;
+}
+
+.header__links {
+    display: flex;
+    gap: 2rem;
+    font-size: 1.2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header__links a {
+    color: #fff;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.header__links a:hover {
+    color: #dfffe2;
+}
+
+/* Language switch button */
+.lang-switch {
+    display: flex;
+    align-items: center;
+}
+
+.lang-switch button {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.lang-switch button:hover {
+    background: #dfffe2;
+    color: var(--green);
+}
+
+/* Slider */
+.section-slider {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.section-track {
+    display: flex;
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+}
+
+.section-slide {
+    flex: 0 0 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(91, 162, 65, 0.7);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background 0.3s;
+}
+
+.nav-btn:hover {
+    background: rgba(91, 162, 65, 0.9);
+}
+
+.nav-btn.left {
+    left: 20px;
+}
+
+.nav-btn.right {
+    right: 20px;
+}
+
+.dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    border: none;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #fff;
+}
+
+/* Анімації появи */
+.animate {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.animate.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Home */
+.home__slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.home__slide__image {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.home__slide__image::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.home__slide__text {
+    position: absolute;
+    color: var(--white);
+    padding: 2rem;
+    max-width: 600px;
+    top: 10%;
+    left: 10%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Стилі тільки для секції Destinations */
+.home__slide__text h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.home__slide__text p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin: 0 auto;
+}
+
+.section-slide:nth-child(3) .home__slide__text {
+    max-width: 1050px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Residence */
+.residence {
+    display: flex;
+    align-items: center;
+    min-height: 100vh;
+    position: relative;
+    padding-block: var(--header-height);
+    overflow: hidden;
+    background: #FFFED0;
+}
+
+.residence__container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    row-gap: 2rem;
+    padding-inline: 2rem;
+    width: 100%;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.residence__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    min-height: 70vh;
+}
+
+.residence__text {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+.residence__text .heading {
+    font-size: 2rem;
+    color: #231f20;
+    text-align: left;
+}
+
+.residence__text .text {
+    line-height: 1.5em;
+    font-size: 1.15rem;
+    color: #231f20;
+    text-align: left;
+}
+
+.residence__image {
+    width: 100%;
+    max-width: 500px;
+    flex-shrink: 0;
+    max-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.residence__image img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Destinations */
+.destinations {
+    min-height: 100vh;
+    padding: 100px 1rem;
+    background: url("https://raw.githubusercontent.com/KarinaR-Ch/Terra-Nova/main/img/image-374822222.jpg") center/cover no-repeat;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.destinations .animate {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 2rem;
+    border-radius: 10px;
+}
+
+.destinations h1 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.destinations p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 1150px;
+    margin: 0 auto;
+}
+
+/* Activities */
+.activities {
+    padding: 100px 20px;
+    background: #FFFED0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.cards-row {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card-container {
+    width: 250px;
+    height: 350px;
+    perspective: 1000px;
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+    cursor: pointer;
+}
+
+.card.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-face {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-front {
+    position: relative;
+}
+
+.card_caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--green);
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.card-back {
+    background: #92E6B8;
+    color: #18860F;
+    transform: rotateY(180deg);
+    padding: 20px;
+    text-align: center;
+}
+
+.card-back-content h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.card-back-content p {
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+
+/* Fotos */
+.fotos img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Join */
+.join {
+    padding: 100px 20px;
+    background: url("https://raw.githubusercontent.com/KarinaR-Ch/Terra-Nova/main/img/parnassus-greece%20(1)%201.png") center/cover no-repeat;
+    color: #fff;
+    position: relative;
+}
+
+.join::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.join__content {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form input,
+.form textarea {
+    padding: 10px;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background: #fff;
+    color: #000;
+}
+
+.form button {
+    background: var(--green);
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    z-index: 2000;
+}
+
+.modal.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    max-width: 400px;
+}
+
+.modal-content h2 {
+    color: var(--green);
+    margin-bottom: 1rem;
+}
+
+.modal-content button {
+    margin-top: 1rem;
+    padding: 10px 20px;
+    border: none;
+    background: var(--green);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Footer */
+.footer {
+    background: #FFFED0;
+    padding: 40px 20px;
+}
+
+.footer__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.footer__col {
+    min-width: 200px;
+}
+
+.footer__logo img {
+    width: 120px;
+}
+
+.footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer__links li {
+    margin: 8px 0;
+}
+
+.footer__links a {
+    color: var(--dark);
+    transition: 0.3s;
+}
+
+.footer__links a:hover {
+    color: var(--green);
+}
+
+.footer__links.social {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer__links.social a {
+    font-size: 1.8rem;
+    color: #18860F;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.9rem;
+}
+
+/* Scroll to top */
+#scrollTopBtn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--green);
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+    z-index: 1100;
+}
+
+#scrollTopBtn.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#scrollTopBtn:hover {
+    background: #4c8836;
+}
