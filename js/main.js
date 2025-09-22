@@ -1,27 +1,28 @@
-// Main JavaScript file that initializes all functionality
+// Main initialization file
 document.addEventListener('DOMContentLoaded', function() {
-    // IntersectionObserver для анімації тексту
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("show");
-            }
-        });
-    }, { threshold: 0.2 });
+    console.log('Terra Nova website initialized');
     
-    document.querySelectorAll('.animate').forEach(el => observer.observe(el));
+    // Initialize all components
+    initScrollToTop();
+    initMobileHeaderBehavior();
+});
 
-    // Scroll to top button
+// Scroll to top functionality
+function initScrollToTop() {
     const scrollBtn = document.getElementById("scrollTopBtn");
-    window.addEventListener("scroll", () => {
-        scrollBtn.classList.toggle("show", window.scrollY > 300);
-    });
-    
-    scrollBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    });
+    if (scrollBtn) {
+        window.addEventListener("scroll", () => {
+            scrollBtn.classList.toggle("show", window.scrollY > 300);
+        });
+        
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    }
+}
 
-    // Mobile header behavior
+// Mobile header behavior
+function initMobileHeaderBehavior() {
     const header = document.querySelector('.header');
     const logo = document.querySelector('.header__logo');
     let isMobile = window.innerWidth <= 768;
@@ -35,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
             header.classList.add('scrolled');
             logo.classList.add('hidden');
             
-            // Determine background color and adjust menu icon color
             const sections = document.querySelectorAll('section');
             let currentSection = null;
             
@@ -47,11 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             
             if (currentSection) {
-                // Check if section has dark background
                 const computedStyle = window.getComputedStyle(currentSection);
                 const bgColor = computedStyle.backgroundColor;
                 
-                // Simple check for dark backgrounds
                 if (bgColor.includes('0, 0, 0') || bgColor.includes('rgb(34, 31, 32)') || 
                     currentSection.id === 'destinations' || currentSection.id === 'join') {
                     header.classList.add('dark-bg');
@@ -81,4 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.addEventListener('scroll', updateHeaderOnScroll);
     window.addEventListener('resize', checkMobileView);
-});
+    
+    // Initial check
+    checkMobileView();
+    updateHeaderOnScroll();
+}

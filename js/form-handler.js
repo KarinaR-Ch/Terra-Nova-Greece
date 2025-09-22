@@ -1,5 +1,9 @@
-// Form submission handling
+// Form handling functionality
 document.addEventListener('DOMContentLoaded', function() {
+    initFormHandler();
+});
+
+function initFormHandler() {
     const form = document.getElementById("joinForm");
     const modal = document.getElementById("successModal");
     const closeModalBtn = document.getElementById("closeModal");
@@ -23,11 +27,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     modal.classList.add("show");
                     form.reset();
                 } else {
-                    alert("Помилка при надсиланні. Спробуйте ще раз.");
+                    alert("Error sending message. Please try again.");
                 }
             } catch (error) {
                 console.error("Form error:", error);
-                alert("З'єднання не вдалося.");
+                alert("Connection failed.");
             }
         });
     }
@@ -45,4 +49,4 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-});
+}

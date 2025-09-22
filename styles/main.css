@@ -102,7 +102,6 @@ footer {
 
 .header__logo.hidden {
     opacity: 0;
-    pointer-events: none;
 }
 
 .header__logo img {
@@ -111,9 +110,12 @@ footer {
 }
 
 .nav-group {
+
     display: flex;
     align-items: center;
     background: var(--green);
+
+
 }
 
 .nav-group--wide {
@@ -172,6 +174,7 @@ footer {
     position: relative;
     overflow: hidden;
     height: 100vh;
+
 }
 
 .section-track {
@@ -345,14 +348,12 @@ footer {
 .residence__text .heading {
     font-size: 2rem;
     color: #231f20;
-    text-align: left;
 }
 
 .residence__text .text {
     line-height: 1.5em;
     font-size: 1.15rem;
     color: #231f20;
-    text-align: left;
 }
 
 .residence__image {
@@ -476,6 +477,9 @@ footer {
     background: #92E6B8;
     color: #18860F;
     transform: rotateY(180deg);
+}
+
+.card-back-content {
     padding: 20px;
     text-align: center;
 }
@@ -515,10 +519,6 @@ footer {
 .join__content {
     position: relative;
     max-width: 500px;
-    margin: 0 auto;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 10px;
 }
 
 .form {
@@ -542,8 +542,6 @@ footer {
     border: none;
     padding: 10px;
     cursor: pointer;
-    border-radius: 5px;
-    font-weight: bold;
 }
 
 /* Modal */
@@ -679,4 +677,57 @@ footer {
 
 #scrollTopBtn:hover {
     background: #4c8836;
+}
+
+/* Mobile menu */
+.header__menu-icon {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.header__menu-icon span {
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.header__links-mobile {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100vh;
+    background: var(--green);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    transition: right 0.5s ease;
+    z-index: 2000;
+    display: flex;
+}
+
+.header__links-mobile.active {
+    right: 0;
+}
+
+.close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.header__link-mobile a {
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: bold;
 }
